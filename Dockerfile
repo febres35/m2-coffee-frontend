@@ -1,15 +1,21 @@
 # Multi-stage build for React frontend
 # Stage 1: Build the application
-FROM node:18-alpine as build
+FROM node:18-alpine AS build
 
 # Set working directory
 WORKDIR /app
 
+# Add ca-certificates and curl for SSL handling
+RUN apk add --no-cache ca-certificates curl
+
+# Configure npm to handle SSL issues
+RUN npm config set strict-ssl false
+
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install dependencies (including dev dependencies for build)
+RUN npm ci
 
 # Copy source code
 COPY . .
@@ -19,6 +25,9 @@ RUN npm run build
 
 # Stage 2: Serve the application with nginx
 FROM nginx:alpine
+
+# Install curl for health checks
+RUN apk add --no-cache curl
 
 # Copy built app from build stage
 COPY --from=build /app/build /usr/share/nginx/html

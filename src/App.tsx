@@ -1,12 +1,12 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Layout } from '@/components/layout/Layout';
-import { Dashboard } from '@/pages/dashboard/Dashboard';
-import { Products } from '@/pages/products/Products';
-import { Orders } from '@/pages/orders/Orders';
-import { Customers } from '@/pages/customers/Customers';
-import { Login } from '@/pages/auth/Login';
-import { ProtectedRoute } from '@/components/common/ProtectedRoute';
+import { Layout } from './components/layout/Layout';
+import { Dashboard } from './pages/dashboard/Dashboard';
+import { Products } from './pages/products/Products';
+import { Orders } from './pages/orders/Orders';
+import { Customers } from './pages/customers/Customers';
+import { Login } from './pages/auth/Login';
+import { ProtectedRoute } from './components/common/ProtectedRoute';
 
 const App: React.FC = () => {
   return (
