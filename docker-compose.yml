@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   # Frontend React Application
@@ -50,38 +50,6 @@ services:
     profiles:
       - dev
 
-  # Backend Service (placeholder for future backend implementation)
-  backend:
-    image: nginx:alpine
-    container_name: m2-coffee-backend-placeholder
-    ports:
-      - "8080:80"
-    environment:
-      - NODE_ENV=development
-    networks:
-      - coffee-network
-    restart: unless-stopped
-    # This is a placeholder - replace with actual backend service
-
-  # Database (placeholder for future database implementation)
-  database:
-    image: postgres:15-alpine
-    container_name: m2-coffee-db
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_DB=m2_coffee
-      - POSTGRES_USER=coffee_user
-      - POSTGRES_PASSWORD=coffee_password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./deployment/database/init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - coffee-network
-    restart: unless-stopped
-    profiles:
-      - db
-
   # Redis for caching (optional)
   redis:
     image: redis:7-alpine
@@ -93,10 +61,6 @@ services:
     restart: unless-stopped
     profiles:
       - cache
-
-volumes:
-  postgres_data:
-    driver: local
 
 networks:
   coffee-network:
